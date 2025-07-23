@@ -8,55 +8,66 @@
     html, body {
       margin: 0;
       padding: 0;
-      background-color: #000;
       height: 100%;
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
+      background-color: black;
+      overflow: hidden;
     }
 
     iframe {
-      flex: 1;
-      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       border: none;
-    }
-
-    .barra-inferior {
-      background-color: #111;
-      padding: 12px;
-      text-align: center;
+      z-index: 0;
     }
 
     .btn-fechar {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #ff5252;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+      background-color: rgba(255, 82, 82, 0.9);
       color: white;
       border: none;
+      padding: 10px 16px;
+      font-size: 16px;
       border-radius: 8px;
       cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transition: background-color 0.3s;
     }
 
     .btn-fechar:hover {
-      background-color: #e53935;
+      background-color: rgba(230, 50, 50, 1);
+    }
+
+    @media (max-width: 600px) {
+      .btn-fechar {
+        font-size: 14px;
+        padding: 8px 14px;
+        top: 12px;
+        right: 12px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <iframe id="player" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <button class="btn-fechar" onclick="window.history.back()">✖ Fechar</button>
 
-  <div class="barra-inferior">
-    <button class="btn-fechar" onclick="window.history.back()">Fechar</button>
-  </div>
+  <iframe id="player" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
   <script>
     const params = new URLSearchParams(window.location.search);
     const videoId = params.get('v');
     if (videoId) {
-      document.getElementById('player').src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+      document.getElementById('player').src =
+        `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1`;
     } else {
-      document.body.innerHTML = '<p style="color:white;text-align:center;margin-top:20px">❌ Vídeo inválido</p>';
+      document.body.innerHTML =
+        '<p style="color:white;text-align:center;margin-top:20px">❌ Vídeo inválido</p>';
     }
   </script>
 
