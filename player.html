@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Player de Vídeo</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function getVideoIdFromQuery() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('video') || '';
+    }
+
+    const videoId = getVideoIdFromQuery();
+
+    if (videoId) {
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&showinfo=0`;
+      iframe.allowFullscreen = true;
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      document.body.appendChild(iframe);
+    } else {
+      document.body.innerHTML = '<p style="color: white; font-family: sans-serif;">ID do vídeo não informado.</p>';
+    }
+  </script>
+</body>
+</html>
