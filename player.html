@@ -1,44 +1,64 @@
-<!-- player.html -->
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Player</title>
+  <title>Assistir Vídeo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {
+    html, body {
       margin: 0;
-      background-color: black;
+      padding: 0;
+      background-color: #000;
+      height: 100%;
+      font-family: sans-serif;
       display: flex;
       flex-direction: column;
-      height: 100vh;
     }
+
     iframe {
       flex: 1;
       width: 100%;
       border: none;
     }
-    button {
+
+    .barra-inferior {
+      background-color: #111;
       padding: 12px;
-      background: #ff5252;
-      border: none;
-      color: white;
+      text-align: center;
+    }
+
+    .btn-fechar {
+      padding: 10px 20px;
       font-size: 16px;
+      background-color: #ff5252;
+      color: white;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
+    }
+
+    .btn-fechar:hover {
+      background-color: #e53935;
     }
   </style>
 </head>
 <body>
+
   <iframe id="player" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-  <button onclick="window.history.back()">Fechar</button>
+
+  <div class="barra-inferior">
+    <button class="btn-fechar" onclick="window.history.back()">Fechar</button>
+  </div>
 
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const videoId = urlParams.get('v');
+    const params = new URLSearchParams(window.location.search);
+    const videoId = params.get('v');
     if (videoId) {
-      document.getElementById('player').src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+      document.getElementById('player').src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
     } else {
-      document.body.innerHTML = '<p style="color:white;text-align:center;margin-top:20px">Vídeo inválido</p>';
+      document.body.innerHTML = '<p style="color:white;text-align:center;margin-top:20px">❌ Vídeo inválido</p>';
     }
   </script>
+
 </body>
 </html>
