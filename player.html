@@ -55,9 +55,9 @@
 </head>
 <body>
 
-  <button class="btn-fechar" onclick="window.parent.postMessage('fechar-video', '*')">✖ Fechar</button>
+  <button class="btn-fechar" onclick="window.parent.postMessage('fechar-video', '*')">✖ Fecha</button>
 
-  <iframe id="player" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <iframe id="player" allow="autoplay; encrypted-media" allowfullscreen="false" playsinline></iframe>
 
   <script>
     const params = new URLSearchParams(window.location.search);
